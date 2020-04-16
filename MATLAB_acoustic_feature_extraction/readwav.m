@@ -8,6 +8,21 @@
     Mel Cepstral Coefficients + 1st and 2nd derivatives
 %}
 
+% acousticfeaturevec('osr1.wav')
+myDir = '/Users/dayangraham/Desktop/speech2speech_summ/speech_audios/'; % gets directory
+myFiles = dir(fullfile(myDir,'*.wav'));
+
+% dir(uigetdir)
+allFileNames = {myFiles(:).name};
+
+for k = 1:length(allFileNames)
+
+    filepath = strcat(myDir, allFileNames{k});
+    ret = acousticfeaturevec(filepath);
+    basename = erase(allFileNames{k}, ".wav")
+    save( sprintf(basename),'ret');
+end
+
 
 function fv = acousticfeaturevec(wavfile)
     %%%%%%%%%%%%%%%%%%% PRELIMINARY SECTION AND SETUP %%%%%%%%%%%%%%%%%%%
@@ -113,5 +128,3 @@ function [fv] = constructfeaturevector(vad,pitchstats,melp)
 end
 
 end
-
-

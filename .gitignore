@@ -1,1 +1,7 @@
 *.wav
+/alignment_dependencies
+/conf
+/data
+/exp
+/kaldi
+/text

@@ -9,20 +9,21 @@
 %}
 
 % acousticfeaturevec('osr1.wav')
-myDir = '/Users/dayangraham/Desktop/speech2speech_summ/speech_audios/'; % gets directory
-myFiles = dir(fullfile(myDir,'*.wav'));
+% myDir = '/Users/dayangraham/Desktop/speech2speech_summ/speech_audios'; % gets directory
+% myFiles = dir(fullfile(myDir,'*.wav'));
+% 
+% % dir(uigetdir)
+% allFileNames = {myFiles(:).name};
+% 
+% for k = 1:length(allFileNames)
+% 
+%     filepath = strcat(myDir, allFileNames{k});
+%     ret = acousticfeaturevec(filepath);
+%     basename = erase(allFileNames{k}, ".wav")
+%     save( sprintf(basename),'ret');
+% end
 
-% dir(uigetdir)
-allFileNames = {myFiles(:).name};
-
-for k = 1:length(allFileNames)
-
-    filepath = strcat(myDir, allFileNames{k});
-    ret = acousticfeaturevec(filepath);
-    basename = erase(allFileNames{k}, ".wav")
-    save( sprintf(basename),'ret');
-end
-
+acousticfeaturevec('/Users/dayangraham/Desktop/speech2speech_summ/speech_audios/NNTRAla40xk.wav')
 
 function fv = acousticfeaturevec(wavfile)
     %%%%%%%%%%%%%%%%%%% PRELIMINARY SECTION AND SETUP %%%%%%%%%%%%%%%%%%%
@@ -124,6 +125,9 @@ function [fv] = constructfeaturevector(vad,pitchstats,melp)
     pitchstats = pitchstats(1:minlen, :);
     melp =  melp(1:minlen, :);
     %Concatenate feature vectors
+    assignin('base','vad',vad);
+    assignin('base','pitchstats',pitchstats);
+    assignin('base','melp',melp);
     fv = horzcat(horzcat(vad,pitchstats),melp);
 end
 
